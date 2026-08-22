@@ -27,38 +27,40 @@ html, body {
     font-family: var(--font-sans);
 }
 
-/* NAV */
-
-.site-header {
-    position: relative;
-    min-height: 100vh;
-}
+/* ============================
+   NAVIGATION
+   ============================ */
 
 .nav {
     position: sticky;
     top: 0;
     z-index: 20;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
     padding: 14px 7vw;
     background: linear-gradient(to bottom, rgba(5, 6, 10, 0.95), rgba(5, 6, 10, 0.7));
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border-subtle);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-left {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     letter-spacing: 0.06em;
+    color: var(--text);
 }
 
 .nav-right a {
-    margin-left: 18px;
+    margin-left: 22px;
     font-size: 0.95rem;
     color: var(--muted);
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color 0.25s ease, transform 0.15s ease;
 }
 
 .nav-right a:hover {
@@ -66,7 +68,9 @@ html, body {
     transform: translateY(-1px);
 }
 
-/* HERO */
+/* ============================
+   HERO SECTION
+   ============================ */
 
 .hero {
     position: relative;
@@ -83,8 +87,9 @@ html, body {
     margin: auto;
     width: 420px;
     height: 420px;
-    background: radial-gradient(circle, rgba(91, 141, 255, 0.35), transparent 60%),
-                radial-gradient(circle at 30% 10%, rgba(179, 107, 255, 0.4), transparent 60%);
+    background:
+        radial-gradient(circle, rgba(91, 141, 255, 0.35), transparent 60%),
+        radial-gradient(circle at 30% 10%, rgba(179, 107, 255, 0.4), transparent 60%);
     filter: blur(40px);
     opacity: 0.9;
     z-index: 1;
@@ -99,6 +104,27 @@ html, body {
     background: radial-gradient(circle at top, rgba(15, 20, 35, 0.9), rgba(5, 6, 10, 0.96));
     box-shadow: var(--shadow-soft);
     border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* HERO PHOTO — UPDATED WITH NEON GLOW */
+.hero-photo {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    box-shadow:
+        0 0 25px rgba(91, 141, 255, 0.45),
+        0 0 40px rgba(179, 107, 255, 0.35);
+    margin-bottom: 20px;
+}
+
+.hero-name {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    margin: 0 0 12px;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
 }
 
 .hero-content h1 {
@@ -158,11 +184,36 @@ html, body {
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
 }
 
-/* MAIN */
+/* ============================
+   MAIN SECTIONS
+   ============================ */
 
 .main {
     padding: 40px 7vw 60px;
 }
+
+.section {
+    max-width: 1080px;
+    margin: 0 auto 60px;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0 0 22px;
+}
+
+/* ============================
+   CARDS
+   ============================ */
 
 .cards {
     display: grid;
@@ -176,6 +227,14 @@ html, body {
     background: var(--card-bg);
     border: 1px solid var(--border-subtle);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
 }
 
 .card h3 {
@@ -190,7 +249,62 @@ html, body {
     margin: 0;
 }
 
-/* FOOTER */
+/* ============================
+   CONTACT CARD
+   ============================ */
+
+.contact-card {
+    padding: 20px 18px;
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+    max-width: 480px;
+}
+
+.contact-card p {
+    margin: 6px 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.contact-card span {
+    color: var(--text);
+}
+
+/* ============================
+   ABOUT PAGE — TWO-COLUMN LAYOUT
+   ============================ */
+
+.about-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.about-left {
+    flex: 0 0 220px;
+}
+
+.about-right {
+    flex: 1;
+}
+
+/* ABOUT PHOTO — UPDATED WITH NEON GLOW */
+.about-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 2px solid var(--border-subtle);
+    box-shadow:
+        0 0 25px rgba(91, 141, 255, 0.45),
+        0 0 40px rgba(179, 107, 255, 0.35);
+}
+
+/* ============================
+   FOOTER
+   ============================ */
 
 .footer {
     padding: 22px 7vw 26px;
@@ -201,9 +315,24 @@ html, body {
     background: linear-gradient(to top, rgba(5, 6, 10, 0.95), rgba(5, 6, 10, 0.7));
 }
 
-/* RESPONSIVE */
+/* ============================
+   RESPONSIVE
+   ============================ */
 
 @media (max-width: 720px) {
+
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .nav-right {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
     .hero-content {
         padding: 24px 20px;
     }
@@ -212,8 +341,13 @@ html, body {
         font-size: 2rem;
     }
 
-    .nav-right a {
-        margin-left: 12px;
-        font-size: 0.85rem;
+    /* ABOUT PAGE MOBILE */
+    .about-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-left {
+        margin: 0 auto;
     }
 }

@@ -2,66 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teaching | Prince Sackey</title>
-    <meta name="description" content="Teaching portfolio of Prince Sackey — QTS Mathematics &amp; ICT, Ghana and UK secondary schools.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teaching portfolio of Prince Sackey — QTS Mathematics & ICT, Ghana and UK secondary schools.">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <div class="brand">Prince Sackey</div>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <div class="nav-links" id="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="teaching.html" aria-current="page">Teaching</a>
-        <a href="research.html">Research</a>
-        <a href="contact.html">Contact</a>
+<!-- GLOBAL NAV -->
+<nav class="nav neon-glow">
+    <div class="nav-left">Prince Sackey</div>
+    <div class="nav-right">
+        <a href="index.html" class="glow-link">Home</a>
+        <a href="about.html" class="glow-link">About</a>
+        <a href="projects.html" class="glow-link">Projects</a>
+        <a href="teaching.html" aria-current="page" class="glow-link">Teaching</a>
+        <a href="research.html" class="glow-link">Research</a>
+        <a href="contact.html" class="glow-link">Contact</a>
     </div>
 </nav>
 
-<main>
-    <h2>Teaching Portfolio</h2>
-    <div class="card">
+<main class="main">
+
+    <h2 class="section-title neon-title">Teaching Portfolio</h2>
+
+    <div class="card neon-card">
         <p>
             Qualified Teacher Status (QTS) with experience teaching Mathematics and ICT across Ghana and
             UK secondary schools. Skilled in curriculum delivery, assessment, and supporting learners
             with diverse needs.
         </p>
     </div>
-    <div class="card">
-        <h3>What carries over into data work</h3>
+
+    <div class="card neon-card">
+        <h3 class="neon-title">What carries over into data work</h3>
         <ul class="plain">
-            <li>Breaking a technical idea down to the step where it actually stops making sense to the learner</li>
-            <li>Designing assessment that measures understanding, not just recall of a procedure</li>
-            <li>Adapting explanations on the fly for very different starting levels of prior knowledge</li>
+            <li class="neon-title">Breaking a technical idea down to the step where it actually stops making sense to the learner</li>
+            <li class="neon-title">Designing assessment that measures understanding, not just recall of a procedure</li>
+            <li class="neon-title">Adapting explanations on the fly for very different starting levels of prior knowledge</li>
         </ul>
     </div>
+
 </main>
 
-<footer>
+<footer class="footer neon-glow">
     <div class="footer-links">
-        <a href="mailto:pesky08@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
-        <a href="https://github.com/prince-sackey">GitHub</a>
-        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+        <a href="mailto:pesky08@gmail.com" class="glow-link">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262" class="glow-link">LinkedIn</a>
+        <a href="https://github.com/prince-sackey" class="glow-link">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124" class="glow-link">ORCID</a>
+        <a href="https://www.facebook.com/persky08" class="glow-link">Facebook</a>
     </div>
-    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
+    © 2026 Prince Sackey — AI & Data Science Portfolio
 </footer>
-
-<script>
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => {
-        const open = links.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open);
-    });
-</script>
 
 </body>
 </html>
