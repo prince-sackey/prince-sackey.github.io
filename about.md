@@ -1,12 +1,9 @@
 # About Me
 
-I'm Prince Sackey — an MSc Artificial Intelligence & Data Science student at the University of Hull, with a background in **Mathematics Education (QTS)** and ICT.
+I am Prince Sackey, an AI & Data Science practitioner with a background in Mathematics Education (QTS).  
+I enjoy building intelligent systems, analysing data, and applying machine learning to real-world problems.
 
-My work sits at the intersection of:
-- Machine learning  
-- Data-driven decision making  
-- Mathematical modelling  
-- Responsible AI  
-- Educational technology  
-
-I bring a unique dual identity: **AI practitioner + qualified Maths teacher**, enabling me to design intelligent systems that are both technically strong and pedagogically meaningful.
+### Connect with me
+- **GitHub:** https://github.com/prince-sackey  
+- **LinkedIn:** https://www.linkedin.com/in/prince-sackey-3a851262  
+- **ORCID:** https://orcid.org/0009-0001-7569-6124

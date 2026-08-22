@@ -1,15 +1,14 @@
-# AI & Data Science Projects
+# Projects
 
-## 🔹 Real Estate Price Prediction
-Supervised ML model predicting housing prices using regression techniques.
+## Machine Learning Modelling
+Python • scikit-learn • TensorFlow • PyTorch  
+Predictive modelling, classification, clustering, and model evaluation.
 
-## 🔹 Time-Series Forecasting
-ARIMA, SARIMA, and Prophet models for temporal prediction tasks.
+## AI Fairness & Responsible AI
+Exploring bias detection, fairness metrics, and ethical AI deployment.
 
-## 🔹 Data Mining & Clustering
-Unsupervised learning for pattern discovery and segmentation.
+## Data Mining & Predictive Analytics
+Large-scale data cleaning, feature engineering, and exploratory analysis.
 
-## 🔹 AI Fairness Explorations
-Experiments with fairness metrics, bias detection, and responsible AI frameworks.
-
-More projects coming soon.
+### Connect with me
+- **GitHub:** https://github.com/prince-sackey

@@ -1,8 +1,10 @@
 # Research Interests
 
-- Machine Learning & Applied AI  
-- AI Fairness, Ethics & Responsible AI  
+- Machine Learning & Model Evaluation  
+- AI Fairness & Responsible AI  
 - Data Mining & Predictive Modelling  
-- Time-Series Forecasting  
-- AI in Education & Assessment  
-- Cybersecurity & Ethical Hacking (CEH-aligned)
+- AI in Further Education  
+
+### Connect with me
+- **GitHub:** https://github.com/prince-sackey  
+- **ORCID:** https://orcid.org/0009-0001-7569-6124

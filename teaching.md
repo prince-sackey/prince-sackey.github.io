@@ -1,13 +1,13 @@
 # Teaching Portfolio
 
-Qualified Teacher Status (QTS) — Mathematics Education  
-Experience in Ghana and UK secondary schools.
+Qualified Teacher Status (QTS) with experience teaching Mathematics and ICT across Ghana and UK secondary schools.
 
-## Areas of Expertise
-- KS3 & KS4 Mathematics  
-- ICT integration  
-- Assessment design  
-- Data-driven teaching strategies  
+Skilled in:
+- Curriculum delivery  
+- Assessment  
+- Supporting learners with diverse needs  
+- Integrating technology into learning  
 
-## Teaching Philosophy
-I combine mathematical rigour with AI-driven insights to improve learning outcomes and assessment fairness.
+### Connect with me
+- **GitHub:** https://github.com/prince-sackey  
+- **LinkedIn:** https://www.linkedin.com/in/prince-sackey-3a851262

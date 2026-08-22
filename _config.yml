@@ -1,3 +1,4 @@
-theme: minima
-title: Prince Sackey
-description: AI & Data Science • Mathematics Education • Machine Learning
+title: "Prince Sackey | AI & Data Science"
+description: "Portfolio website for AI, Data Science, Teaching, and Research."
+markdown: kramdown
+theme: null
