@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Prince Sackey</title>
-    <meta name="description" content="Prince Sackey — background in Mathematics Education and AI &amp; Data Science.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <div class="brand">Prince Sackey</div>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <div class="nav-links" id="nav-links">
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-left">Prince Sackey</div>
+    <div class="nav-right">
         <a href="index.html">Home</a>
-        <a href="about.html" aria-current="page">About</a>
+        <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="teaching.html">Teaching</a>
         <a href="research.html">Research</a>
@@ -25,49 +22,33 @@
     </div>
 </nav>
 
-<main>
-    <h2>About Me</h2>
-    <div class="card">
+<!-- MAIN CONTENT -->
+<main class="main">
+
+    <section class="card">
+        <h3>About Me</h3>
         <p>
-            I'm Prince Sackey, an AI &amp; Data Science practitioner with a background in Mathematics
-            Education (QTS). I enjoy building intelligent systems, analysing data, and applying machine
-            learning to real problems — usually starting from the same first-principles approach I used
-            to teach a proof.
+            I am Prince Sackey, an AI & Data Science practitioner with a strong foundation in Mathematics Education (QTS).
+            My work blends machine learning, model evaluation, fairness, and responsible AI with real-world teaching and
+            analytical experience across Ghana and the United Kingdom.
         </p>
         <p>
-            I'm currently based in Hull, United Kingdom, completing my MSc in Artificial Intelligence
-            &amp; Data Science.
+            I am currently completing my MSc in Artificial Intelligence & Data Science in Hull, UK, focusing on model
+            evaluation, data mining, and the role of AI in Further Education. My academic and professional journey
+            reflects a commitment to building intelligent systems that are fair, reliable, and impactful.
         </p>
-    </div>
-    <div class="card">
-        <h3>How I work</h3>
         <p>
-            Years in the classroom taught me to distrust an answer I can't explain simply. I bring that
-            habit into data work: checking assumptions before modelling, being explicit about what a
-            metric does and doesn't show, and writing up results so a non-specialist could follow the
-            reasoning, not just the conclusion.
+            Beyond AI, I bring over a decade of experience teaching Mathematics and ICT, supporting learners with diverse
+            needs, and applying structured problem‑solving to both educational and technical environments.
         </p>
-    </div>
+    </section>
+
 </main>
 
-<footer>
-    <div class="footer-links">
-        <a href="mailto:pesky08@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
-        <a href="https://github.com/prince-sackey">GitHub</a>
-        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
-    </div>
-    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 Prince Sackey · AI & Data Science</p>
 </footer>
-
-<script>
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => {
-        const open = links.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open);
-    });
-</script>
 
 </body>
 </html>
