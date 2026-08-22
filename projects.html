@@ -4,46 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Prince Sackey</title>
+    <meta name="description" content="Machine learning, AI fairness, and data mining projects by Prince Sackey.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav>
-    <div><strong>Prince Sackey</strong></div>
-    <div>
+    <div class="brand">Prince Sackey</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
+        <a href="projects.html" aria-current="page">Projects</a>
         <a href="teaching.html">Teaching</a>
         <a href="research.html">Research</a>
         <a href="contact.html">Contact</a>
     </div>
 </nav>
 
-<section>
-    <h2>AI & Data Science Projects</h2>
+<main>
+    <h2>AI &amp; Data Science Projects</h2>
 
     <div class="card">
         <h3>Machine Learning Modelling</h3>
-        <p>Python • scikit-learn • TensorFlow • PyTorch</p>
-        <p>Predictive modelling, classification, clustering, and model evaluation.</p>
+        <p class="tag-row">Python · scikit-learn · TensorFlow · PyTorch</p>
+        <p>Predictive modelling, classification, clustering, and model evaluation across a range of
+           datasets and problem types.</p>
     </div>
 
     <div class="card">
-        <h3>AI Fairness & Responsible AI</h3>
-        <p>Exploring bias detection, fairness metrics, and ethical AI deployment.</p>
+        <h3>AI Fairness &amp; Responsible AI</h3>
+        <p class="tag-row">Bias detection · fairness metrics · ethical deployment</p>
+        <p>Exploring how bias enters models at the data, training, and deployment stages, and what
+           fairness metrics actually trade off against one another.</p>
     </div>
 
     <div class="card">
-        <h3>Data Mining & Predictive Analytics</h3>
-        <p>Large-scale data cleaning, feature engineering, and exploratory analysis.</p>
+        <h3>Data Mining &amp; Predictive Analytics</h3>
+        <p class="tag-row">Data cleaning · feature engineering · EDA</p>
+        <p>Large-scale data cleaning, feature engineering, and exploratory analysis — including the
+           work behind my MSc dissertation on the effectiveness and implications of data cleaning.</p>
     </div>
-</section>
+</main>
 
 <footer>
-    © 2026 Prince Sackey — AI & Data Science Portfolio
+    <div class="footer-links">
+        <a href="mailto:pesky08@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
+        <a href="https://github.com/prince-sackey">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+    </div>
+    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
 </footer>
+
+<script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+    });
+</script>
 
 </body>
 </html>

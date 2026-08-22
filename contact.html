@@ -4,37 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Prince Sackey</title>
+    <meta name="description" content="Contact Prince Sackey — email, LinkedIn, GitHub, and ORCID.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav>
-    <div><strong>Prince Sackey</strong></div>
-    <div>
+    <div class="brand">Prince Sackey</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="teaching.html">Teaching</a>
         <a href="research.html">Research</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" aria-current="page">Contact</a>
     </div>
 </nav>
 
-<section>
+<main>
     <h2>Contact</h2>
     <div class="card">
-        <p>📍 Hull, United Kingdom</p>
-        <p>📧 Email: pesky08@gmail.com</p>
-        <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/prince-sackey-3a851262">linkedin.com/in/prince-sackey-3a851262</a></p>
-        <p>🟣 ORCID: <a href="https://orcid.org/0009-0001-7569-6124">0009-0001-7569-6124</a></p>
-        <p>🐙 GitHub: <a href="https://github.com/prince-sackey">github.com/prince-sackey</a></p>
+        <ul class="contact-list">
+            <li><span class="label">Location</span> Hull, United Kingdom</li>
+            <li><span class="label">Email</span> <a href="mailto:pesky08@gmail.com">pesky08@gmail.com</a></li>
+            <li><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/prince-sackey-3a851262">linkedin.com/in/prince-sackey-3a851262</a></li>
+            <li><span class="label">ORCID</span> <a href="https://orcid.org/0009-0001-7569-6124">0009-0001-7569-6124</a></li>
+            <li><span class="label">GitHub</span> <a href="https://github.com/prince-sackey">github.com/prince-sackey</a></li>
+        </ul>
     </div>
-</section>
+</main>
 
 <footer>
-    © 2026 Prince Sackey — AI & Data Science Portfolio
+    <div class="footer-links">
+        <a href="mailto:pesky08@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
+        <a href="https://github.com/prince-sackey">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+    </div>
+    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
 </footer>
+
+<script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+    });
+</script>
 
 </body>
 </html>

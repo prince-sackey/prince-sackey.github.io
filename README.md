@@ -6,16 +6,16 @@ This repository contains the source code for my personal portfolio website hoste
 https://prince-sackey.github.io
 
 ### Structure
-- `index.html` — Homepage  
-- `style.css` — Global styling  
-- `about.md` — About page  
-- `projects.md` — Projects page  
-- `teaching.md` — Teaching portfolio  
-- `research.md` — Research interests  
-- `contact.md` — Contact page  
-- `.nojekyll` — Disables Jekyll processing  
-- `_config.yml` — Basic configuration  
+- `index.html` — Homepage
+- `about.html` — About page
+- `projects.html` — Projects page
+- `teaching.html` — Teaching portfolio
+- `research.html` — Research interests
+- `contact.html` — Contact page
+- `style.css` — Global styling
+- `_nojekyll` — Disables Jekyll processing on GitHub Pages
+- `_config.yml` — Basic site configuration
 
 ### Author
-Prince Sackey  
+Prince Sackey
 AI & Data Science | Mathematics Education (QTS)

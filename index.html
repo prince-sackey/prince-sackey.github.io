@@ -3,44 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prince Sackey | AI & Data Science</title>
+    <title>Prince Sackey | AI &amp; Data Science</title>
+    <meta name="description" content="Portfolio of Prince Sackey — AI &amp; Data Science practitioner and Qualified Teacher (Mathematics), MSc student in Artificial Intelligence &amp; Data Science.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div><strong>Prince Sackey</strong></div>
-        <div>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="teaching.html">Teaching</a>
-            <a href="research.html">Research</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-
-    <!-- HERO -->
-    <div class="hero">
-        <h1>Hi, I’m Prince Sackey</h1>
-        <p>AI & Data Science • Mathematics Education (QTS) • Machine Learning • Responsible AI</p>
+<nav>
+    <div class="brand">Prince Sackey</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="research.html">Research</a>
+        <a href="contact.html">Contact</a>
     </div>
+</nav>
 
-    <!-- HOME CONTENT -->
-    <section>
-        <h2>Welcome</h2>
-        <div class="card">
-            <p>
-                Welcome to my professional portfolio. I combine AI, machine learning, and mathematics education
-                to build intelligent systems and support data-driven decision-making.
-            </p>
+<div class="hero">
+    <div class="hero-inner">
+        <p class="eyebrow">AI &amp; Data Science · Hull, UK</p>
+        <h1>From the chalkboard to the model.</h1>
+        <p class="lede">
+            I'm Prince Sackey — a Qualified Teacher of Mathematics now completing an MSc in Artificial
+            Intelligence &amp; Data Science. I build machine learning systems the way I once built lessons:
+            starting from first principles and checking every step of the working.
+        </p>
+        <div class="hero-cta">
+            <a class="btn btn-primary" href="projects.html">See my projects</a>
+            <a class="btn btn-secondary" href="contact.html">Get in touch</a>
         </div>
-    </section>
 
-    <footer>
-        © 2026 Prince Sackey — AI & Data Science Portfolio
-    </footer>
+        <svg class="trajectory" viewBox="0 0 620 190" role="img" aria-labelledby="traj-title traj-desc">
+            <title id="traj-title">Career trajectory</title>
+            <desc id="traj-desc">A line rising from secondary school mathematics teaching in Ghana and the UK, through Qualified Teacher Status, to an MSc in AI and Data Science.</desc>
+            <path class="path" d="M30,158 C140,150 190,140 270,112 C380,76 470,48 590,34" />
+            <circle class="point" cx="30" cy="158" r="5" />
+            <text x="30" y="178">2016–22</text>
+            <text x="30" y="145">Maths teacher · Ghana &amp; UK</text>
+
+            <circle class="point" cx="270" cy="112" r="5" />
+            <text x="270" y="132" text-anchor="middle">QTS</text>
+            <text x="270" y="99" text-anchor="middle">ICT &amp; Mathematics</text>
+
+            <circle class="point now" cx="590" cy="34" r="6" />
+            <text class="now-label" x="590" y="20" text-anchor="end">2026</text>
+            <text x="590" y="54" text-anchor="end">MSc AI &amp; Data Science</text>
+        </svg>
+    </div>
+</div>
+
+<main>
+    <h2>Welcome</h2>
+    <div class="card">
+        <p>
+            This is my professional portfolio: a running record of the machine learning, data mining and
+            responsible AI work I do alongside my MSc, and the classroom experience that still shapes how
+            I explain and evaluate it.
+        </p>
+        <p>
+            Start with <a href="projects.html">Projects</a> for the technical work, <a href="research.html">Research</a>
+            for what I'm currently reading and asking questions about, or <a href="about.html">About</a> for the
+            longer version of the path above.
+        </p>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="mailto:pesky08@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
+        <a href="https://github.com/prince-sackey">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+    </div>
+    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
+</footer>
+
+<script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+    });
+</script>
 
 </body>
 </html>

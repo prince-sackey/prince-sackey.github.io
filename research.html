@@ -4,38 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research | Prince Sackey</title>
+    <meta name="description" content="Research interests of Prince Sackey — machine learning, AI fairness, data mining, and AI in further education.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav>
-    <div><strong>Prince Sackey</strong></div>
-    <div>
+    <div class="brand">Prince Sackey</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="teaching.html">Teaching</a>
-        <a href="research.html">Research</a>
+        <a href="research.html" aria-current="page">Research</a>
         <a href="contact.html">Contact</a>
     </div>
 </nav>
 
-<section>
+<main>
     <h2>Research Interests</h2>
     <div class="card">
-        <ul>
-            <li>Machine Learning & Model Evaluation</li>
-            <li>AI Fairness & Responsible AI</li>
-            <li>Data Mining & Predictive Modelling</li>
+        <ul class="plain">
+            <li>Machine Learning &amp; Model Evaluation</li>
+            <li>AI Fairness &amp; Responsible AI</li>
+            <li>Data Mining &amp; Predictive Modelling</li>
             <li>AI in Further Education</li>
         </ul>
     </div>
-</section>
+    <div class="card">
+        <h3>Current focus</h3>
+        <p class="tag-row">MSc dissertation</p>
+        <p>
+            Quantifying the effectiveness and implications of data cleaning — looking at how different
+            cleaning strategies actually change model outcomes, not just how tidy the resulting dataset looks.
+        </p>
+    </div>
+</main>
 
 <footer>
-    © 2026 Prince Sackey — AI & Data Science Portfolio
+    <div class="footer-links">
+        <a href="mailto:pesky08@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
+        <a href="https://github.com/prince-sackey">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+    </div>
+    © 2026 Prince Sackey — AI &amp; Data Science Portfolio
 </footer>
+
+<script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+    });
+</script>
 
 </body>
 </html>
