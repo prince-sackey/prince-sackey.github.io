@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Spam Detection Agent | Prince Sackey</title>
+    <meta name="description" content="An AI-powered SMS spam detector combining a Linear SVM classifier with a Groq AI agent — classifies messages and explains why they are spam.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Page-specific additions ── */
+        .project-hero {
+            background: linear-gradient(135deg, rgba(91,141,255,0.08), rgba(179,107,255,0.06));
+            border: 1px solid rgba(91,141,255,0.18);
+            border-radius: 18px;
+            padding: 36px 32px;
+            margin-bottom: 28px;
+        }
+
+        .project-hero h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin: 0 0 10px;
+            letter-spacing: 0.04em;
+        }
+
+        .project-hero .subtitle {
+            font-size: 1rem;
+            color: var(--muted);
+            margin: 0 0 22px;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            font-size: 0.78rem;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(91,141,255,0.3);
+            color: var(--accent);
+            background: rgba(91,141,255,0.07);
+            letter-spacing: 0.02em;
+        }
+
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1px;
+            background: var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 18px 0;
+        }
+
+        .flow-step {
+            background: var(--card-bg);
+            padding: 18px 16px;
+            text-align: center;
+        }
+
+        .flow-step .step-num {
+            font-size: 0.72rem;
+            color: var(--accent2);
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        .flow-step .step-label {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 14px;
+        }
+
+        .metrics-table th {
+            text-align: left;
+            color: var(--muted);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+
+        .metrics-table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--text);
+        }
+
+        .metrics-table tr.winner td {
+            color: var(--accent);
+        }
+
+        .metrics-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .limitation-block {
+            border-left: 3px solid var(--accent2);
+            padding: 14px 18px;
+            background: rgba(179,107,255,0.05);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 14px;
+        }
+
+        .limitation-block .lim-title {
+            font-size: 0.88rem;
+            color: var(--accent2);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .limitation-block p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .finding-block {
+            border-left: 3px solid var(--accent);
+            padding: 14px 18px;
+            background: rgba(91,141,255,0.05);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 14px;
+        }
+
+        .finding-block .find-title {
+            font-size: 0.88rem;
+            color: var(--accent);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .finding-block p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p, .card ul {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .card ul {
+            padding-left: 18px;
+        }
+
+        .card ul li {
+            margin-bottom: 6px;
+        }
+
+        .related-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            width: 100%;
+            transition: color 0.2s;
+        }
+
+        .related-link:last-child {
+            border-bottom: none;
+        }
+
+        .related-link:hover {
+            color: var(--accent);
+        }
+
+        .related-link .rel-label {
+            font-size: 0.75rem;
+            color: var(--accent2);
+            min-width: 90px;
+        }
+
+        @media (max-width: 720px) {
+            .project-hero {
+                padding: 24px 20px;
+            }
+            .project-hero h2 {
+                font-size: 1.5rem;
+            }
+            .flow-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav neon-glow">
+    <div class="nav-left">Prince Sackey</div>
+    <div class="nav-right">
+        <a href="index.html" class="glow-link">Home</a>
+        <a href="about.html" class="glow-link">About</a>
+        <a href="projects.html" aria-current="page" class="glow-link">Projects</a>
+        <a href="skills.html" class="glow-link">Skills</a>
+        <a href="teaching.html" class="glow-link">Teaching</a>
+        <a href="research.html" class="glow-link">Research</a>
+        <a href="contact.html" class="glow-link">Contact</a>
+    </div>
+</nav>
+
+<main class="main">
+
+    <!-- BACK LINK -->
+    <p style="margin-bottom:20px;">
+        <a href="projects.html" class="glow-link" style="font-size:0.88rem;">← Back to Projects</a>
+    </p>
+
+    <!-- HERO -->
+    <div class="project-hero neon-card">
+        <h2 class="neon-title">SMS Spam Detection Agent</h2>
+        <p class="subtitle">
+            A Linear SVM classifier upgraded with an AI agent layer — not just a verdict, but an explanation and a plan.
+        </p>
+
+        <div class="badge-row">
+            <span class="badge">Python</span>
+            <span class="badge">scikit-learn</span>
+            <span class="badge">TF-IDF</span>
+            <span class="badge">Linear SVM</span>
+            <span class="badge">Groq API</span>
+            <span class="badge">OpenAI</span>
+            <span class="badge">Streamlit</span>
+        </div>
+
+        <div class="demo-buttons">
+            <a href="https://prince-sackey-sms-spam-detection-with-agent.streamlit.app/" class="btn primary glow-button" target="_blank">
+                Live Agent Demo →
+            </a>
+            <a href="https://github.com/prince-sackey/sms-spam-agent" class="btn secondary glow-button" target="_blank">
+                GitHub →
+            </a>
+            <a href="https://smsspamdetection-prince-sackey.streamlit.app/" class="btn secondary glow-button" target="_blank">
+                Original Classifier →
+            </a>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="card neon-card">
+        <h3 class="neon-title">How It Works</h3>
+        <p>
+            This project adds an AI reasoning layer on top of a trained Linear SVM classifier. 
+            The model handles classification; the agent handles explanation. Neither could do the 
+            other's job — the combination is what makes this useful.
+        </p>
+
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="step-num">01</div>
+                <div class="step-label">User pastes SMS message</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-num">02</div>
+                <div class="step-label">Agent calls classifier tool</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-num">03</div>
+                <div class="step-label">SVM returns verdict + confidence</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-num">04</div>
+                <div class="step-label">Agent explains in plain English</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-num">05</div>
+                <div class="step-label">Agent recommends next steps</div>
+            </div>
+        </div>
+
+        <p>
+            Text preprocessing matches training conditions exactly — URLs, emails, phone numbers, 
+            and money amounts are replaced with placeholder tokens before classification. 
+            Skipping this step would mean the model sees messages in a different form than it 
+            was trained on, which matters most for spam content that typically contains links and prices.
+        </p>
+    </div>
+
+    <!-- MODEL PERFORMANCE -->
+    <div class="card neon-card">
+        <h3 class="neon-title">Model Selection</h3>
+        <p>
+            Four models were trained and compared. Linear SVM was selected — not because it had 
+            the highest raw F1, but because its cross-validated score is a more reliable estimate 
+            than a single train/val/test split.
+        </p>
+
+        <table class="metrics-table">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Spam F1</th>
+                    <th>Accuracy</th>
+                    <th>CV Mean F1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="winner">
+                    <td>Linear SVM ✓</td>
+                    <td>0.942</td>
+                    <td>98.6%</td>
+                    <td>0.971 ± 0.007</td>
+                </tr>
+                <tr>
+                    <td>Logistic Regression</td>
+                    <td>0.938</td>
+                    <td>98.5%</td>
+                    <td>0.967 ± 0.004</td>
+                </tr>
+                <tr>
+                    <td>CNN (Conv1D)</td>
+                    <td>0.949</td>
+                    <td>98.7%</td>
+                    <td>N/A — single split</td>
+                </tr>
+                <tr>
+                    <td>BiLSTM</td>
+                    <td>0.930</td>
+                    <td>98.3%</td>
+                    <td>N/A — single split</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top:14px;">
+            A majority-class baseline (predicting ham for every message) reaches 87% accuracy 
+            purely from class imbalance — but catches zero spam. This is why Spam F1 was used 
+            as the primary metric, not accuracy.
+        </p>
+    </div>
+
+    <!-- LIMITATIONS & FINDINGS -->
+    <div class="card neon-card">
+        <h3 class="neon-title">Honest Findings</h3>
+        <p>
+            Testing the deployed agent revealed two cases where the model's 2012 training data 
+            diverges from modern message patterns — both documented below as research findings 
+            rather than failures.
+        </p>
+
+        <div class="limitation-block">
+            <div class="lim-title">Dataset Drift — Telecom Roaming Notifications</div>
+            <p>
+                A legitimate MTN Ghana roaming notification was classified as spam with high confidence. 
+                The message contained precise per-minute pricing and a phone number — patterns the 
+                2012 training data associates strongly with promotional spam. Modern telecom 
+                notifications were not part of the SMS Spam Collection dataset.
+            </p>
+        </div>
+
+        <div class="limitation-block">
+            <div class="lim-title">Dataset Drift — Delivery Phishing</div>
+            <p>
+                A classic delivery phishing message ("Your parcel could not be delivered — confirm 
+                your address at delivery-info.com") was classified as ham. Delivery notification 
+                scams became widespread after 2015; the training data predates this pattern entirely.
+            </p>
+        </div>
+
+        <div class="finding-block">
+            <div class="find-title">Agent Layer as Partial Compensation</div>
+            <p>
+                In both cases, the AI agent added cautionary reasoning that partially compensated 
+                for the model's error — flagging the suspicious domain in the phishing case and 
+                noting the unusual pricing format in the roaming case. The agent cannot override 
+                the classifier, but it can flag uncertainty and advise caution where the model 
+                is confident but the context is ambiguous.
+            </p>
+        </div>
+
+        <div class="finding-block">
+            <div class="find-title">Connection to Dissertation Research</div>
+            <p>
+                These findings mirror the vocabulary cliff effect documented in my MSc dissertation — 
+                where out-of-distribution vocabulary causes model performance to degrade sharply. 
+                Modern spam terminology (delivery-info, roaming rates) falls outside the classifier's 
+                learned vocabulary distribution, producing the same misclassification pattern 
+                observed when cleaning removes rare tokens from NLP training data.
+            </p>
+        </div>
+    </div>
+
+    <!-- WHAT THIS ADDS OVER THE ORIGINAL -->
+    <div class="card neon-card">
+        <h3 class="neon-title">What the Agent Layer Adds</h3>
+        <p>The original classifier returns a label and a score. The agent version returns a conversation.</p>
+        <ul>
+            <li>Plain-English explanation of why the message looks like spam or ham</li>
+            <li>Confidence interpretation — very high, high, moderate, or borderline</li>
+            <li>Specific recommended actions tailored to the damage type</li>
+            <li>Conversational interface — users can check multiple messages in one session</li>
+            <li>Honest uncertainty flagging when confidence is low</li>
+        </ul>
+    </div>
+
+    <!-- RELATED -->
+    <div class="card neon-card">
+        <h3 class="neon-title">Related Work</h3>
+        <a href="https://smsspamdetection-prince-sackey.streamlit.app/" class="related-link glow-link" target="_blank">
+            <span class="rel-label">Original</span>
+            SMS Spam Detector — Linear SVM classifier without the agent layer
+        </a>
+        <a href="https://huggingface.co/spaces/prince-sackey/sms_spam_detection" class="related-link glow-link" target="_blank">
+            <span class="rel-label">Hugging Face</span>
+            Original Gradio deployment on Hugging Face Spaces
+        </a>
+        <a href="projects.html" class="related-link glow-link">
+            <span class="rel-label">Portfolio</span>
+            All deployed projects →
+        </a>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer neon-glow">
+    <div class="footer-links">
+        <a href="mailto:pesky08@gmail.com" class="glow-link">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262" class="glow-link">LinkedIn</a>
+        <a href="https://github.com/prince-sackey" class="glow-link">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124" class="glow-link">ORCID</a>
+        <a href="https://www.facebook.com/persky08" class="glow-link">Facebook</a>
+    </div>
+    © 2026 Prince Sackey · AI & Data Science
+</footer>
+
+</body>
+</html>
