@@ -10,17 +10,13 @@
 
 <body>
 
-<!-- GLOBAL NAV -->
 <nav class="nav neon-glow">
     <div class="nav-left">Prince Sackey</div>
     <div class="nav-right">
         <a href="index.html" class="glow-link">Home</a>
-        <a href="about.html" class="glow-link">About</a>
         <a href="projects.html" aria-current="page" class="glow-link">Projects</a>
-        <a href="skills.html" class="glow-link">Skills</a>
-        <a href="teaching.html" class="glow-link">Teaching</a>
         <a href="research.html" class="glow-link">Research</a>
-        <a href="contact.html" class="glow-link">Contact</a>
+        <a href="about.html" class="glow-link">Contact</a>
     </div>
 </nav>
 
@@ -28,93 +24,81 @@
 
     <h2 class="section-title neon-title">Deployed AI Projects</h2>
 
-    <!-- Vehicle Damage Classification -->
+    <!-- ── VEHICLE DAMAGE ─────────────────────────── -->
     <div class="card neon-card">
-        <h3 class="neon-title">Vehicle Damage Classification</h3>
+        <h3 class="neon-title">Vehicle Damage Assessment Agent</h3>
+        <p class="tag-row">Python · ONNX · FastAPI · Docker · Azure Container Apps · Groq AI</p>
+        <p>
+            An AI agent that classifies vehicle damage from an uploaded photo, explains the damage
+            professionally, recommends repair urgency, and generates a downloadable insurance
+            assessment report. Built on a MobileNetV2 model (84% accuracy) converted to ONNX
+            and served via a FastAPI backend deployed on Azure Container Apps.
+            Includes a confidence threshold — if the model is uncertain, the agent requests
+            a clearer image rather than guessing.
+        </p>
+        <p>
+            <a href="vehicle-damage-agent/index.html" class="glow-link">Live Demo →</a>
+            &nbsp;·&nbsp;
+            <a href="https://github.com/prince-sackey/vehicle-damage-classifier" class="glow-link">GitHub →</a>
+        </p>
+    </div>
+
+    <!-- Vehicle Damage Original -->
+    <div class="card neon-card">
+        <h3 class="neon-title">Vehicle Damage Classifier</h3>
         <p class="tag-row">Python · TensorFlow/Keras · MobileNetV2 · Streamlit · Gradio · HuggingFace Spaces</p>
         <p>
             A 6‑class image classifier for insurance claim triage — crack, dent, glass shatter,
             lamp broken, scratch, or tire flat — comparing a custom CNN baseline against
             MobileNetV2 transfer learning. Reached <strong>84% test accuracy</strong>.
+            The foundation for the agent version above.
         </p>
         <p>
-            <a href="https://vehicle-damage-classifier-ayfcv3teugwa9jjkaoeziz.streamlit.app/" class="glow-link">
-                Streamlit Live Demo →
-            </a>
+            <a href="https://vehicle-damage-classifier-ayfcv3teugwa9jjkaoeziz.streamlit.app/" class="glow-link">Streamlit Demo →</a>
             &nbsp;·&nbsp;
-            <a href="https://huggingface.co/spaces/prince-sackey/vehicle-damage-classifer" class="glow-link">
-                HuggingFace Live Demo →
-            </a>
+            <a href="https://huggingface.co/spaces/prince-sackey/vehicle-damage-classifer" class="glow-link">HuggingFace Demo →</a>
             &nbsp;·&nbsp;
-            <a href="https://github.com/prince-sackey/vehicle-damage-classifier" class="glow-link">
-                GitHub →
-            </a>
+            <a href="https://github.com/prince-sackey/vehicle-damage-classifier" class="glow-link">GitHub →</a>
         </p>
     </div>
 
-    <!-- Vehicle Damage Agent — coming soon -->
-    <div class="card neon-card">
-        <h3 class="neon-title">Vehicle Damage Assessment Agent</h3>
-        <p class="tag-row">Python · TensorFlow/Keras · MobileNetV2 · Gemini API · Streamlit</p>
-        <p>
-            An upgrade of the vehicle damage classifier — wrapping the MobileNetV2 model with an 
-            AI agent that interprets predictions, explains damage professionally, recommends repair 
-            urgency, and generates a downloadable insurance assessment report. Includes a confidence 
-            threshold that requests a clearer image when the model is uncertain.
-        </p>
-        <p style="color: var(--muted); font-size: 0.88rem;">
-            🔧 Deployment in progress — check back soon.
-        </p>
-    </div>
-
-    <!-- SMS Spam Detection Agent -->
+    <!-- ── SMS SPAM ────────────────────────────────── -->
     <div class="card neon-card">
         <h3 class="neon-title">SMS Spam Detection Agent</h3>
-        <p class="tag-row">Python · scikit-learn · TF-IDF · Linear SVM · Groq API · LLaMA · Streamlit</p>
+        <p class="tag-row">Python · scikit-learn · TF-IDF · Linear SVM · FastAPI · Docker · Azure Container Apps · Groq AI</p>
         <p>
-            An upgrade of the original SMS spam detector — the Linear SVM classifier is wrapped 
-            with an AI agent that explains <em>why</em> a message looks like spam, interprets 
-            confidence scores in plain English, and recommends specific actions. Testing revealed 
-            dataset drift against modern spam patterns — documented as a research finding connecting 
-            to the vocabulary cliff effect from my MSc dissertation.
+            An AI agent that classifies SMS messages as spam or ham, explains why in plain English,
+            interprets confidence scores, and recommends specific actions. Built on a Linear SVM
+            pipeline (98.6% accuracy) served via FastAPI on Azure Container Apps.
+            Testing revealed dataset drift against modern spam patterns — documented as a research
+            finding connecting to the vocabulary cliff effect from my MSc dissertation.
         </p>
         <p>
-            <a href="sms-spam-agent.html" class="glow-link">
-                Full Write-up →
-            </a>
+            <a href="sms-spam-agent/index.html" class="glow-link">Live Demo →</a>
             &nbsp;·&nbsp;
-            <a href="https://prince-sackey-sms-spam-detection-with-agent.streamlit.app/" class="glow-link">
-                Live Agent Demo →
-            </a>
+            <a href="sms-spam-agent.html" class="glow-link">Full Write-up →</a>
             &nbsp;·&nbsp;
-            <a href="https://github.com/prince-sackey/sms-spam-agent" class="glow-link">
-                GitHub →
-            </a>
+            <a href="https://github.com/prince-sackey/sms-spam-agent" class="glow-link">GitHub →</a>
         </p>
     </div>
 
-    <!-- SMS Spam Detection Original -->
+    <!-- SMS Spam Original -->
     <div class="card neon-card">
-        <h3 class="neon-title">SMS Spam Detection</h3>
+        <h3 class="neon-title">SMS Spam Detector</h3>
         <p class="tag-row">Python · scikit-learn · TF-IDF · Linear SVM · Streamlit · HuggingFace Spaces</p>
         <p>
             A binary classifier distinguishing spam from legitimate SMS messages, comparing Logistic
             Regression, Linear SVM, BiLSTM, and CNN models. Linear SVM won via 5-fold cross-validation,
-            beating a majority-class baseline (87% accuracy, but 0% spam recall) — showing why raw
-            accuracy is the wrong metric for imbalanced classification problems.
+            beating a majority-class baseline (87% accuracy, 0% spam recall) — showing why raw
+            accuracy is the wrong metric for imbalanced classification. The foundation for the agent
+            version above.
         </p>
         <p>
-            <a href="https://smsspamdetection-prince-sackey.streamlit.app/" class="glow-link">
-                Streamlit Live Demo →
-            </a>
+            <a href="https://smsspamdetection-prince-sackey.streamlit.app/" class="glow-link">Streamlit Demo →</a>
             &nbsp;·&nbsp;
-            <a href="https://huggingface.co/spaces/prince-sackey/sms_spam_detection" class="glow-link">
-                HuggingFace Live Demo →
-            </a>
+            <a href="https://huggingface.co/spaces/prince-sackey/sms_spam_detection" class="glow-link">HuggingFace Demo →</a>
             &nbsp;·&nbsp;
-            <a href="https://github.com/prince-sackey/sms_spam_detection" class="glow-link">
-                GitHub →
-            </a>
+            <a href="https://github.com/prince-sackey/sms_spam_detection" class="glow-link">GitHub →</a>
         </p>
     </div>
 

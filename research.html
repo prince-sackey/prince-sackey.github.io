@@ -10,17 +10,13 @@
 
 <body>
 
-<!-- GLOBAL NAV -->
 <nav class="nav neon-glow">
     <div class="nav-left">Prince Sackey</div>
     <div class="nav-right">
         <a href="index.html" class="glow-link">Home</a>
-        <a href="about.html" class="glow-link">About</a>
         <a href="projects.html" class="glow-link">Projects</a>
-        <a href="skills.html" class="glow-link">Skills</a>
-        <a href="teaching.html" class="glow-link">Teaching</a>
         <a href="research.html" aria-current="page" class="glow-link">Research</a>
-        <a href="contact.html" class="glow-link">Contact</a>
+        <a href="about.html" class="glow-link">Contact</a>
     </div>
 </nav>
 
@@ -38,25 +34,33 @@
     </div>
 
     <div class="card neon-card">
-        <h3 class="neon-title">Current Focus</h3>
-        <p class="tag-row">MSc Dissertation</p>
+        <h3 class="neon-title">MSc Dissertation</h3>
+        <p class="tag-row">Quantifying the Effectiveness and Implications of Data Cleaning</p>
         <p>
-            Quantifying the effectiveness and implications of data cleaning — examining how different
-            cleaning strategies change model outcomes, not just how tidy the dataset looks.
+            Examining how different cleaning strategies change model outcomes — not just how tidy
+            the dataset looks. Key findings include the vocabulary cliff effect, silent data loss,
+            and model-cleaning interaction, each documenting ways that well-intentioned cleaning
+            decisions can silently degrade model performance. The work is currently being prepared
+            for publication in Machine Learning (Springer).
         </p>
     </div>
 
     <div class="card neon-card">
         <h3 class="neon-title">Applied Work</h3>
         <p>
-            My deployed projects serve as practical demonstrations of my research interests. The vehicle
-            damage classifier explores model evaluation under real‑world noise, comparing a custom CNN
-            with MobileNetV2 transfer learning. The SMS spam detector examines class imbalance and metric
-            selection, showing how accuracy can fail while recall and F1 reveal the true behaviour of a
-            model. Both projects include full evaluation write‑ups that connect directly to my focus on
-            fairness, reliability, and responsible deployment.
+            My deployed projects serve as practical demonstrations of my research interests.
+            The vehicle damage classifier explores model evaluation under real‑world noise,
+            comparing a custom CNN with MobileNetV2 transfer learning. The SMS spam detector
+            examines class imbalance and metric selection, showing how accuracy can fail while
+            recall and F1 reveal the true behaviour of a model.
         </p>
-        <p><a href="projects.html" class="glow-link">See the full write-ups on the Projects page →</a></p>
+        <p style="margin-top:12px;">
+            Both agent versions revealed dataset drift against modern patterns — a direct
+            empirical connection to the vocabulary cliff effect documented in my dissertation.
+        </p>
+        <p style="margin-top:12px;">
+            <a href="projects.html" class="glow-link">See deployed projects →</a>
+        </p>
     </div>
 
 </main>
