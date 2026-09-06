@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Spam Detection Agent · Prince Sackey</title>
+    <meta name="description" content="AI-powered SMS spam detection. Paste a message and get an instant professional assessment.">
+    <style>
+        :root {
+            --bg:        #05060a;
+            --surface:   rgba(18, 22, 35, 0.92);
+            --accent:    #5b8dff;
+            --accent2:   #b36bff;
+            --text:      #f5f7ff;
+            --muted:     #8b90b0;
+            --border:    rgba(255,255,255,0.07);
+            --radius:    16px;
+            --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+            --font-serif:"Georgia", serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(91,141,255,0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(179,107,255,0.08), transparent);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6vw;
+            height: 56px;
+            background: rgba(5,6,10,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .nav-brand {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links { display: flex; gap: 28px; }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* HERO */
+        .hero {
+            padding: 72px 6vw 48px;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(91,141,255,0.3);
+            border-radius: 999px;
+            padding: 4px 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: normal;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        /* MAIN */
+        .main {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 6vw 80px;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* PANEL */
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .panel-title {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* TEXTAREA */
+        .message-input {
+            width: 100%;
+            min-height: 140px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px dashed rgba(91,141,255,0.25);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .message-input:focus {
+            border-color: var(--accent);
+            background: rgba(91,141,255,0.04);
+        }
+
+        .message-input::placeholder { color: var(--muted); }
+
+        /* EXAMPLES */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .example-btn {
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .example-btn:hover { color: var(--accent); border-color: rgba(91,141,255,0.3); }
+
+        /* BUTTONS */
+        .btn {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 13px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(91,141,255,0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            width: auto;
+            display: inline-block;
+            padding: 9px 20px;
+            font-size: 0.82rem;
+        }
+
+        .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+        /* SPINNER */
+        .spinner-wrap { display: none; text-align: center; padding: 40px; }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto 14px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner-wrap p { color: var(--muted); font-size: 0.88rem; }
+
+        /* RESULT */
+        .result-wrap { display: none; }
+
+        /* Verdict */
+        .verdict {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .verdict-icon { font-size: 2rem; }
+
+        .verdict-label {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: normal;
+        }
+
+        .verdict-label.spam { color: #ff6b8a; }
+        .verdict-label.ham  { color: #6bffb8; }
+
+        .verdict-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+
+        .badge-confident {
+            background: rgba(91,141,255,0.12);
+            color: var(--accent);
+            border: 1px solid rgba(91,141,255,0.3);
+        }
+
+        .badge-uncertain {
+            background: rgba(179,107,255,0.12);
+            color: var(--accent2);
+            border: 1px solid rgba(179,107,255,0.3);
+        }
+
+        /* Score bar */
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .score-track {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+            width: 0%;
+        }
+
+        .score-fill.spam { background: linear-gradient(90deg, #ff6b8a, #ff4466); }
+        .score-fill.ham  { background: linear-gradient(90deg, var(--accent), #6bffb8); }
+
+        .score-label { font-size: 0.82rem; color: var(--muted); min-width: 120px; text-align: right; }
+
+        /* Warning */
+        .warning-box {
+            display: none;
+            gap: 10px;
+            align-items: flex-start;
+            background: rgba(179,107,255,0.06);
+            border: 1px solid rgba(179,107,255,0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* Message display */
+        .message-display {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        /* Assessment */
+        .assessment-body { font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+        .assessment-body strong { color: var(--text); font-weight: 600; }
+        .assessment-body h3 { color: var(--text); font-size: 0.9rem; margin: 16px 0 6px; font-weight: 600; }
+        .assessment-body ul, .assessment-body ol { padding-left: 18px; margin: 6px 0 10px; }
+        .assessment-body li { margin-bottom: 5px; }
+        .assessment-body p { margin-bottom: 10px; }
+
+        /* Report */
+        .report-row { display: flex; gap: 10px; align-items: stretch; }
+
+        .report-input {
+            flex: 1;
+            padding: 11px 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .report-input:focus { border-color: rgba(91,141,255,0.5); }
+        .report-input::placeholder { color: var(--muted); }
+
+        .report-btn {
+            padding: 11px 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+
+        .report-btn:hover:not(:disabled) { opacity: 0.88; }
+        .report-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 10px 18px;
+            background: rgba(91,141,255,0.08);
+            border: 1px solid rgba(91,141,255,0.25);
+            border-radius: 10px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .download-link:hover { background: rgba(91,141,255,0.14); }
+
+        /* Error */
+        .error-bar {
+            display: none;
+            background: rgba(255,80,100,0.08);
+            border: 1px solid rgba(255,80,100,0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: #ff8096;
+            margin-top: 12px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 6vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: var(--muted);
+            flex-wrap: wrap;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        footer a { color: var(--muted); text-decoration: none; margin-left: 18px; transition: color 0.2s; }
+        footer a:hover { color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .nav { padding: 0 5vw; }
+            .hero { padding: 48px 5vw 32px; }
+            .main { padding: 0 5vw 60px; }
+            .report-row { flex-direction: column; }
+            .report-btn { width: 100%; }
+            footer { flex-direction: column; text-align: center; }
+            footer a { margin-left: 8px; margin-right: 8px; }
+            .nav-links { gap: 16px; }
+            .score-label { min-width: 80px; font-size: 0.75rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .score-fill { transition: none; }
+            .spinner { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="https://prince-sackey.github.io" class="nav-brand">Prince Sackey</a>
+    <div class="nav-links">
+        <a href="https://prince-sackey.github.io">Home</a>
+        <a href="https://prince-sackey.github.io/projects.html">Projects</a>
+        <a href="https://prince-sackey.github.io/research.html">Research</a>
+        <a href="https://prince-sackey.github.io/contact.html">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <span class="hero-eyebrow">Spam Detection Tool</span>
+    <h1>SMS Spam Detection Agent</h1>
+    <p>
+        Paste any SMS message to get an instant AI-powered assessment.
+        Powered by Linear SVM (98.6% accuracy) + Groq AI Agent.
+    </p>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- INPUT -->
+    <div class="panel" id="input-panel">
+        <p class="panel-title">Paste message</p>
+        <textarea
+            class="message-input"
+            id="message-input"
+            placeholder="Paste an SMS message here to check if it's spam..."
+        ></textarea>
+
+        <!-- Quick examples -->
+        <div class="examples">
+            <span style="font-size:0.72rem; color:var(--muted); align-self:center;">Try:</span>
+            <button class="example-btn" data-msg="Free entry! You have won a £1000 prize. Call 07123456789 now to claim!">Prize scam</button>
+            <button class="example-btn" data-msg="Your parcel could not be delivered. Please confirm your address at delivery-info.com">Delivery phish</button>
+            <button class="example-btn" data-msg="Hey, are we still meeting for lunch tomorrow?">Legit message</button>
+            <button class="example-btn" data-msg="URGENT: Your account has been compromised. Click http://scam.com to verify now.">Phishing link</button>
+        </div>
+
+        <div class="error-bar" id="error-bar">
+            Unable to reach the detection service. Please try again in a moment.
+        </div>
+
+        <button class="btn btn-primary" id="check-btn" disabled>Check message</button>
+    </div>
+
+    <!-- SPINNER -->
+    <div class="spinner-wrap" id="spinner-wrap">
+        <div class="spinner"></div>
+        <p>Analysing message&hellip;</p>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-wrap" id="result-wrap">
+
+        <!-- Verdict -->
+        <div class="panel">
+            <p class="panel-title">Verdict</p>
+
+            <div class="verdict">
+                <span class="verdict-icon" id="verdict-icon"></span>
+                <span class="verdict-label" id="verdict-label"></span>
+                <span class="verdict-badge" id="verdict-badge"></span>
+            </div>
+
+            <div class="score-row">
+                <div class="score-track">
+                    <div class="score-fill" id="score-fill"></div>
+                </div>
+                <span class="score-label" id="score-label"></span>
+            </div>
+
+            <div class="warning-box" id="warning-box">
+                <span style="flex-shrink:0;">⚠️</span>
+                <span>Confidence is borderline — this message has some characteristics of both spam and legitimate messages.
+                Exercise caution and verify with the sender through a trusted channel if unsure.</span>
+            </div>
+
+            <!-- Message analysed -->
+            <p style="font-size:0.72rem; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Message analysed</p>
+            <div class="message-display" id="message-display"></div>
+        </div>
+
+        <!-- Assessment -->
+        <div class="panel">
+            <p class="panel-title">Professional assessment</p>
+            <div class="assessment-body" id="assessment-body"></div>
+        </div>
+
+        <!-- Report -->
+        <div class="panel">
+            <p class="panel-title">Generate report</p>
+            <p style="font-size:0.84rem; color:var(--muted); margin-bottom:16px; line-height:1.6;">
+                Enter your name to generate a formal spam detection report for your records.
+            </p>
+            <div class="report-row">
+                <input type="text" class="report-input" id="customer-name" placeholder="Full name (optional)">
+                <button class="report-btn" id="report-btn">Generate</button>
+            </div>
+            <div id="download-wrap" style="display:none;">
+                <a class="download-link" id="download-link" download="spam_report.txt">
+                    📄 Download report
+                </a>
+            </div>
+        </div>
+
+        <!-- Reset -->
+        <div style="text-align:center; padding-bottom:8px;">
+            <button class="btn btn-ghost" id="reset-btn" style="width:auto;">← Check another message</button>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Prince Sackey · AI &amp; Data Science</span>
+    <div>
+        <a href="mailto:pesky08@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/prince-sackey-3a851262">LinkedIn</a>
+        <a href="https://github.com/prince-sackey">GitHub</a>
+        <a href="https://orcid.org/0009-0001-7569-6124">ORCID</a>
+    </div>
+</footer>
+
+<script>
+const API = "https://sms-spam-api.politegrass-52183d9d.uksouth.azurecontainerapps.io";
+
+const messageInput = document.getElementById("message-input");
+const checkBtn     = document.getElementById("check-btn");
+const spinnerWrap  = document.getElementById("spinner-wrap");
+const resultWrap   = document.getElementById("result-wrap");
+const errorBar     = document.getElementById("error-bar");
+const resetBtn     = document.getElementById("reset-btn");
+
+let lastResult = null;
+
+// Enable button when message typed
+messageInput.addEventListener("input", () => {
+    checkBtn.disabled = !messageInput.value.trim();
+    errorBar.style.display = "none";
+});
+
+// Example buttons
+document.querySelectorAll(".example-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        messageInput.value = btn.dataset.msg;
+        checkBtn.disabled = false;
+        errorBar.style.display = "none";
+        resultWrap.style.display = "none";
+        messageInput.focus();
+    });
+});
+
+// Check message
+checkBtn.addEventListener("click", async () => {
+    const msg = messageInput.value.trim();
+    if (!msg) return;
+
+    checkBtn.disabled = true;
+    spinnerWrap.style.display = "block";
+    resultWrap.style.display  = "none";
+    errorBar.style.display    = "none";
+
+    try {
+        const res = await fetch(`${API}/classify`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg, customer_name: "" })
+        });
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        lastResult = data;
+        render(data);
+    } catch {
+        errorBar.style.display = "block";
+        checkBtn.disabled = false;
+    } finally {
+        spinnerWrap.style.display = "none";
+    }
+});
+
+function render(d) {
+    const isSpam = d.prediction === "SPAM";
+
+    // Verdict
+    document.getElementById("verdict-icon").textContent = isSpam ? "🔴" : "🟢";
+    const label = document.getElementById("verdict-label");
+    label.textContent = isSpam ? "SPAM" : "HAM";
+    label.className   = "verdict-label " + (isSpam ? "spam" : "ham");
+
+    const badge = document.getElementById("verdict-badge");
+    badge.textContent = d.low_confidence ? "Borderline" : (isSpam ? "Confirmed spam" : "Legitimate");
+    badge.className   = "verdict-badge " + (d.low_confidence ? "badge-uncertain" : "badge-confident");
+
+    // Score bar — use absolute score value as percentage (cap at 100%)
+    const scoreVal = parseFloat(d.score);
+    const scoreAbs = Math.min(Math.abs(scoreVal) / 3 * 100, 100);
+    document.getElementById("score-label").textContent = `Score: ${d.score} · ${d.confidence}`;
+    const fill = document.getElementById("score-fill");
+    fill.className = "score-fill " + (isSpam ? "spam" : "ham");
+    setTimeout(() => { fill.style.width = scoreAbs + "%"; }, 80);
+
+    // Warning
+    document.getElementById("warning-box").style.display = d.low_confidence ? "flex" : "none";
+
+    // Message display
+    document.getElementById("message-display").textContent = d.message;
+
+    // Assessment
+    document.getElementById("assessment-body").innerHTML = mdToHtml(d.assessment);
+
+    // Show result
+    resultWrap.style.display = "block";
+    resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function mdToHtml(text) {
+    text = text.replace(/^---+$/gm, "");
+    text = text.replace(/^### (.+)$/gm, "<h3>$1</h3>");
+    text = text.replace(/^## (.+)$/gm,  "<h3>$1</h3>");
+    text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    text = text.replace(/\*(.*?)\*/g,     "<em>$1</em>");
+    text = text.replace(/^[-*•] (.+)$/gm, "<li>$1</li>");
+    text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
+    text = text.split(/\n{2,}/).map(block => {
+        block = block.trim();
+        if (!block) return "";
+        if (/^<(h[1-6]|ul|ol|li)/.test(block)) return block;
+        if (block.includes("<li>")) return `<ul>${block}</ul>`;
+        return `<p>${block.replace(/\n/g, "<br>")}</p>`;
+    }).join("\n");
+    return text;
+}
+
+// Report
+document.getElementById("report-btn").addEventListener("click", async () => {
+    if (!lastResult) return;
+    const btn  = document.getElementById("report-btn");
+    const name = document.getElementById("customer-name").value.trim() || "Not provided";
+    btn.disabled = true;
+    btn.textContent = "Generating…";
+
+    try {
+        const params = new URLSearchParams({
+            prediction:    lastResult.prediction,
+            confidence:    lastResult.confidence,
+            assessment:    lastResult.assessment,
+            message:       lastResult.message,
+            customer_name: name
+        });
+        const res  = await fetch(`${API}/report?${params}`, { method: "POST" });
+        const data = await res.json();
+        const blob = new Blob([data.content], { type: "text/plain" });
+        const url  = URL.createObjectURL(blob);
+        const link = document.getElementById("download-link");
+        link.href     = url;
+        link.download = `${data.report_id}.txt`;
+        document.getElementById("download-wrap").style.display = "block";
+    } catch(e) { console.error(e); }
+    finally {
+        btn.disabled = false;
+        btn.textContent = "Generate";
+    }
+});
+
+// Reset
+resetBtn.addEventListener("click", () => {
+    messageInput.value = "";
+    checkBtn.disabled = true;
+    resultWrap.style.display = "none";
+    document.getElementById("download-wrap").style.display = "none";
+    document.getElementById("customer-name").value = "";
+    document.getElementById("score-fill").style.width = "0%";
+    lastResult = null;
+    errorBar.style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>
